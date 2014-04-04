@@ -1,0 +1,27 @@
+<h1>Welcome to <%= @crm_app_name %></h1>
+<p>Main menu</p>
+<ul>
+  <li><a href="/rolodex">Contact ID search</a></li>
+</ul>
+
+<h1>All Contacts</h1>
+
+<form action = "/contacts" method = "get">
+  <label for = "trait">trait</label>
+  <select id = "trait" name="trait">
+
+    <option value = "id">ID</option>
+    <option value = "first_name">First Name</option>
+    <option value = "last_name">Last Name</option>
+    <option value = "note">Notes</option>
+
+  </select>
+
+<label for = "search_goal">Search For</label>
+<input type = "text" name = "search_goal" id = "search goal"></input>
+
+<input type = "submit" name = "submit">
+
+</form>
+
+
