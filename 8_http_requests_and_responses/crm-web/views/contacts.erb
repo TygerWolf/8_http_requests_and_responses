@@ -2,8 +2,17 @@
 
 <ul>
   <% @contacts.each do |contact| %>
-    <li><%= contact.id %> <%= contact.first_name %> <%= contact.last_name %> / <%= contact.email%> / <%= contact.note %> <a href="/contacts/<%= contact.id %>/edit">Edit</a></li>
+  <li><%= contact.id %> <%= contact.first_name %> <%= contact.last_name %> / <%= contact.email%> / <%= contact.note %> <a href="/contacts/<%= contact.id %>/edit">Edit</a>
+
+    <form action="/contacts/<%= contact.id %>" method="post">
+      <input type="hidden" name="_method" value="delete" />
+
+<input type="submit" value="delete">
+
+
+    </form>
+  </li>
   <% end %>
 </ul>
 
-
+<p><a href="/">Back to home</a></p>

@@ -1,9 +1,9 @@
 require_relative 'contact'
 require_relative 'rolodex'
 require 'sinatra'
-require 'data_mapper'
+# require 'data_mapper'
 
-DataMapper.setup(:default, "sqlite3:database.sqlite3")
+# DataMapper.setup(:default, "sqlite3:database.sqlite3")
 
 
 @@rolodex = Rolodex.new
@@ -21,7 +21,7 @@ get "/contacts" do
     @contacts = @@rolodex.contacts
   else
     @contacts = @@rolodex.find(params[:trait], params[:search_goal])
-  end
+   end
   erb :contacts
 end
 
@@ -47,6 +47,24 @@ end
 post '/contacts' do
   new_contact = Contact.new(params[:first_name], params[:last_name], params[:email], params[:note])
   @@rolodex.add_new_contact(new_contact)
-  redirect to ('/contacts')
+  redirect to('/contacts')
 end
+
+put '/contacts/:id' do
+  @@rolodex.edit_contact(params[:id], params[:first_name], params[:last_name], params[:email], params[:note])
+  redirect to("/contacts/#{params[:id]}")
+end
+
+get '/contacts/:id' do
+  @contact = @@rolodex.find("id", params[:id].to_i)[0]
+  erb :show_contact
+end
+
+delete '/contacts/:id' do
+  @contact = @@rolodex.remove_contact(params[:id].to_i)
+  redirect to ("/contacts")
+end
+
+
+
 
